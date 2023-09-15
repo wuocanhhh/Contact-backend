@@ -14,9 +14,9 @@ if  (favorite =! undefined ){
         filters.push(' name = ${name}');
     }
     return res.send({
-        message: 'getContactsByFilter handler with query{
+        message: `getContactsByFilter handler with query{
             ${filters.join(', ')}
-        }',
+        }`,
         
     });
 }

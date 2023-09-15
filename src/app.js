@@ -1,26 +1,25 @@
-const express = require ('express');
-const cors = require ('cors');
+const express = require("express");
+const cors = require("cors");
 
-const app = express ();
+const {
+  resourceNotFound,
+  handleError,
+} = require("./controller/error.controller");
 
-const contactsRouter = require ('./routes/contacts.router');
+const contactsRouter = require("./routes/contacts.router");
 
-    const {
-        resourNotFound,
-        handleError
-        } = require ('./controllers/errors.controller');
-    
+const app = express();
 
-app.use ('/api/contact', contactsRouter);
-app.use(resourNotFound);
-app.use (cors ());
+app.use(cors());
 app.use(express.json());
-app.use(handleError);
 
-
-app.get ('/', (req, res) => {
-    res.json ({ message :'Welcome to contact book application .'});
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to contact book application." });
 });
 
+app.use("/api/contacts", contactsRouter);
+
+app.use(resourceNotFound);
+app.use(handleError);
 
 module.exports = app;
